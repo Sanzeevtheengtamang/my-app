@@ -6,14 +6,7 @@ class New_Item extends Component {
     var name = this.refs.name.value;
     var description = this.refs.description.value;
     var data = {name: name, description: description}
-    // $.ajax({
-    //   url: "/api/v1/items",
-    //   type: "POST",
-    //   data: { item: { name: name, description: description } },
-    //   success: response => {
-    //     console.log("it worked!", response);
-    //   }
-    // });
+
     console.log('The name value is ' + name + 'the description value is ' + description);
 
     fetch('/api/v1/items', {
@@ -24,7 +17,7 @@ class New_Item extends Component {
       }
     })
     .then(res => res.json())
-    .then(response => console.log('Success:', JSON.stringify(response)))
+      .then((response) => this.props.handleSubmit(response))
   }
 
   render() {

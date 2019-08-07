@@ -2,38 +2,22 @@ import React, { Component } from 'react'
 
 export class All_Item extends Component {
   
-  constructor(){
-    super()
-    this.state = {
-      items: []
-    }
+  handleDelete(id) {
+    this.props.handleDelete(id);
   }
-  componentDidMount() {
-    // $.getJSON('/api/v1/items.json', (response) => { this.setState({ items: response }) });
-    fetch('/api/v1/items.json')
-    .then(response=> response.json())
-    .then(data =>  { this.setState({ items: data })})
-    
-    console.log("component mounted")
-  }
+
   render() {
     console.log("render")
-    console.log(this.state.items)
-    // let one = this.state.items
-    
-    // console.log(one[1]);
-    //     return (
-    //   <div>
-    //     <h1>All Component</h1>
-    //   </div>
-    // )
+    console.log(this.props.items)
 
-    let items = this.state.items
+    let items = this.props.items
     var display_items = items.map((item) => {
       return (
         <div key={item.id}>
           <h3>{item.name}</h3>
           <p>{item.description}</p>
+          {/* <button onClick={this.handleEdit()}> Edit </button> */}
+          <button onClick={this.handleDelete.bind(this, item.id)}>Delete</button>
         </div>
       )
     });
