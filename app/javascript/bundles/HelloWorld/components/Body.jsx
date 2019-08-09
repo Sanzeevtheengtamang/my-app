@@ -22,7 +22,7 @@ class Body extends Component {
     var newState = this.state.items.concat(item);
     this.setState({ items: newState })
   }
-  
+
   handleDelete = (id) => {
     console.log('in handle delete'+id);
 
@@ -30,6 +30,29 @@ class Body extends Component {
       method: 'DELETE',
     })
     .then(() => this.removeItemClient(id))
+  }
+
+  handleUpdate(item) {
+    // $.ajax({
+    //   url: `/api/v1/items/${item.id}`,
+    //   type: 'PUT',
+    //   data: { item: item },
+    //   success: () => {
+    //     console.log('you did it!!!');
+    //     //this.updateItems(item);
+    //     // callback to swap objects
+    //   }
+    // }
+    // )
+    fetch(`/api/v1/items/${item.id}`, {
+      method: 'PUT',
+      body: JSON.stringify(item),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then((response) => console.log('you did it!!!'))
   }
 
   removeItemClient = (id) => {

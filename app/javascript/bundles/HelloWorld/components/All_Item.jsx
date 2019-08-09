@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
-
+import Item from "./Item";
 export class All_Item extends Component {
   
   handleDelete(id) {
     this.props.handleDelete(id);
+  }
+
+  onUpdate(item) {
+    this.props.onUpdate(item);
   }
 
   render() {
@@ -14,10 +18,9 @@ export class All_Item extends Component {
     var display_items = items.map((item) => {
       return (
         <div key={item.id}>
-          <h3>{item.name}</h3>
-          <p>{item.description}</p>
-          {/* <button onClick={this.handleEdit()}> Edit </button> */}
-          <button onClick={this.handleDelete.bind(this, item.id)}>Delete</button>
+          <Item item={item}
+            handleDelete={this.handleDelete.bind(this, item.id)}
+            handleEdit={this.handleEdit} />
         </div>
       )
     });
